@@ -5,8 +5,9 @@ export default  class Customer {
         this.coordinates = {
             x: coordinates[0],
             y: coordinates[1]
-        } 
-    }  
+        }
+   } 
+
 }
 
 let customer = new Customer(1, 'testName', 2, 7);

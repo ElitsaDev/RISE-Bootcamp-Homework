@@ -3,5 +3,12 @@ export default class Warehouse {
         this.x = x;
         this.y = y;
         this.name = name;
-    }  
+        this.products = {}
+    } 
+    
+    loadingProducts(products){
+        if(products){
+            this.products = products;
+        }
+    }
 }
