@@ -29,7 +29,7 @@ if(positionRightHouse){
 }
 
 //Populate city with customers
-let firstCustomer = new Customer(1, 'John Stocks', 10, 10);
+let firstCustomer = new Customer( 1, 'John Stocks', 10, 10);
 let positionFirstCustomer = FindPoint(city.x, city.y, firstCustomer.coordinates.x, firstCustomer.coordinates.y);
 
 if(positionFirstCustomer){
