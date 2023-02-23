@@ -1,11 +1,11 @@
 {
   "name": "rise-bootcamp-homework",
   "version": "1.0.0",
+  "type": "module",
   "description": "First Homework\r Елица Андреева, \r e-mail:eli0andr@abv.bg",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "--save-dev webpack nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/ElitsaDev/RISE-Bootcamp-Homework/issues"
   },
-  "homepage": "https://github.com/ElitsaDev/RISE-Bootcamp-Homework#readme"
+  "homepage": "https://github.com/ElitsaDev/RISE-Bootcamp-Homework#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "node-fetch": "^3.3.0",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0"
+  }
 }

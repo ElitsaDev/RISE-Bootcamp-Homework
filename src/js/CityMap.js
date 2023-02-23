@@ -1,6 +1,5 @@
 
-
-export default  class CityMap {
+export default class CityMap {
     
     constructor(x, y ) {
         this.x = x;
@@ -8,8 +7,7 @@ export default  class CityMap {
         this.board = [];
     }
 
-    create() {
-        
+    create() {  
         for (let i = 0; i < this.x; i++) {
             this.board[i] = [];
             for (let j = 0; j < this.y; j++) {
@@ -19,7 +17,8 @@ export default  class CityMap {
              
     }
 
-    populateCity(x, y, value){
-       this.board[x][y] = value;
+    populateCity( x, y, value){
+        this.board[x][y] = value ;
+            
     }
 }

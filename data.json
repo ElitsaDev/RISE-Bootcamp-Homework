@@ -1,0 +1,87 @@
+{
+    "map-top-right-coordinate": {
+        "x": 20,
+        "y": 20
+    },
+    "products": [
+        "tomatoes",
+        "cucumber",
+        "cheese",
+        "milk",
+        "ham",
+        "eggs",
+        "bananas",
+        "carrots",
+        "bread",
+        "onion"
+    ],
+    "warehouses": [
+        {
+            "x": 10,
+            "y": 10,
+            "name": "Left warehouse"
+        },
+        {
+            "x": 15,
+            "y": 15,
+            "name": "Right warehouse"
+        }
+    ],
+    "customers": [
+        {
+            "id": 1,
+            "name": "John Stocks",
+            "coordinates": {
+                "x": 1,
+                "y": 1
+            }
+        },
+        {
+            "id": 2,
+            "name": "Alfred Derrick",
+            "coordinates": {
+                "x": 7,
+                "y": 15
+            }
+        },
+        {
+            "id": 3,
+            "name": "Richard Brune",
+            "coordinates": {
+                "x": 8,
+                "y": 17
+            }
+        }
+    ],
+    "orders": [
+        {
+            "customerId": 1,
+            "productList": {
+                "tomatoes": 5,
+                "cucumber": 5,
+                "cheese": 1,
+                "milk": 2
+            }
+        },
+        {
+            "customerId": 1,
+            "productList": {
+                "eggs": 10,
+                "cucumber": 2,
+                "cheese": 1,
+                "ham": 2
+            }
+        },
+        {
+            "customerId": 2,
+            "productList": {
+                "eggs": 10,
+                "tomatoes": 2,
+                "bananas": 5,
+                "carrots": 15,
+                "bread": 2,
+                "onion": 6
+            }
+        }
+    ]
+}

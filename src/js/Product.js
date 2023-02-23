@@ -1,4 +1,6 @@
 
-function Product(name){
-    this.name = name;
+export default  class Product {
+    constructor(name){
+        this.name = name;
+    }  
 }

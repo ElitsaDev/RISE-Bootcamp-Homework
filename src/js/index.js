@@ -1,44 +1,50 @@
 import CityMap from "./CityMap.js";
 import Warehouse from "./Warehouse.js";
-import FindPoint from "./util.js";
 import Customer from "./Customer.js";
+import FindPoint from "./util.js";
 
-let city = new CityMap(15, 15);
+import fs from 'fs';
 
+const data = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
+const cityDimensionX = data['map-top-right-coordinate'].x;
+const cityDimensionY = data['map-top-right-coordinate'].y;
+let city = new CityMap(cityDimensionX, cityDimensionY);
 city.create();
 
-let leftHouse = new Warehouse(0, 0, "Left warehouse");
-let rightHouse = new Warehouse(9, 9, "Right warehouse");
+let numberOfHouses = data['warehouses'].length;
 
-console.log(leftHouse);
+for (let i = 0; i < numberOfHouses; i++) {
+    let x = data['warehouses'][i].x;
+    let y = data['warehouses'][i].y;
+    let house = new Warehouse(x, y, data['warehouses'][i].name);
+    //console.log(house);
 
-let positionLeftHouse = FindPoint(city.x, city.y, leftHouse.x, leftHouse.y);
-let positionRightHouse = FindPoint(city.x, city.y, rightHouse.x, rightHouse.y);
+    let positionOfHouse = FindPoint(cityDimensionX, cityDimensionY, x, y);
+    if (positionOfHouse) {
+        city.populateCity(x, y, 'H');
 
-//Refactor with warehousesDB.forEach()
-if(positionLeftHouse){
-    city.populateCity(leftHouse.x, leftHouse.y, 'H');
-}else{
-    console.log("Warehouse is outside of city!");
-}
-
-if(positionRightHouse){
-    city.populateCity(rightHouse.x, rightHouse.y, 'H');
-}else{
-    console.log("Warehouse is outside of city!");
+    } else {
+        console.log("Warehouse is outside of city!");
+    }
 }
 
 //Populate city with customers
-let firstCustomer = new Customer( 1, 'John Stocks', 10, 10);
-let positionFirstCustomer = FindPoint(city.x, city.y, firstCustomer.coordinates.x, firstCustomer.coordinates.y);
+let numberOfCustomers = data['customers'].length;
+for (let i = 0; i < numberOfCustomers; i++) {
+    let x = data['customers'][i].coordinates.x;
+    let y = data['customers'][i].coordinates.y;
+    let customer = new Customer(i, data['customers'][i].name, x, y);
+    //console.log(customer);
 
-if(positionFirstCustomer){
-    city.populateCity(firstCustomer.coordinates.x, firstCustomer.coordinates.y, 'C');
+    let positionOfCustomer = FindPoint(cityDimensionX, cityDimensionY, x, y);
+    if (positionOfCustomer) {
+        city.populateCity(x, y, 'C');
+    } else {
+        console.log("Customer is outside of city!");
+    }
 }
-    
 
-
-console.table(city.board); 
+console.table(city.board);
 
 /*
 let getDronPosition = new Array();
@@ -51,3 +57,7 @@ let getDronPosition = new Array();
             }
 }
 */
+
+
+
+

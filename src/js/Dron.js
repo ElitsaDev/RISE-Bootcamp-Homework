@@ -1,4 +1,4 @@
-class Dron {
+export default  class Dron {
     constructor(x , y, name){
         this.x = x;
         this.y = y;
@@ -6,5 +6,3 @@ class Dron {
     }  
 }
 
-
-exports.Dron;
