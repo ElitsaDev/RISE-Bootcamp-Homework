@@ -1,26 +1,44 @@
 import CityMap from "./CityMap.js";
 import Warehouse from "./Warehouse.js";
-import FindPoint from "./util.js"
+import FindPoint from "./util.js";
+import Customer from "./Customer.js";
 
+let city = new CityMap(15, 15);
 
-let village = new CityMap(10, 10);
+city.create();
 
-village.create();
+let leftHouse = new Warehouse(0, 0, "Left warehouse");
+let rightHouse = new Warehouse(9, 9, "Right warehouse");
 
+console.log(leftHouse);
 
-let leftHouse = new Warehouse(5, 5, "Left warehouse");
-let rightHouse = new Warehouse(20, 20, "Right warehouse");
+let positionLeftHouse = FindPoint(city.x, city.y, leftHouse.x, leftHouse.y);
+let positionRightHouse = FindPoint(city.x, city.y, rightHouse.x, rightHouse.y);
 
-console.log(leftHouse)
-
-let positionLeftHouse = FindPoint(village.x, village.y, leftHouse.x, leftHouse.y);
-let positionRightHouse = FindPoint(village.x, village.y, rightHouse.x, rightHouse.y);
-
+//Refactor with warehousesDB.forEach()
 if(positionLeftHouse){
-    village.updateMapWithHouses(leftHouse.x, leftHouse.y);
+    city.populateCity(leftHouse.x, leftHouse.y, 'H');
+}else{
+    console.log("Warehouse is outside of city!");
 }
 
+if(positionRightHouse){
+    city.populateCity(rightHouse.x, rightHouse.y, 'H');
+}else{
+    console.log("Warehouse is outside of city!");
+}
 
+//Populate city with customers
+let firstCustomer = new Customer(1, 'John Stocks', 10, 10);
+let positionFirstCustomer = FindPoint(city.x, city.y, firstCustomer.coordinates.x, firstCustomer.coordinates.y);
+
+if(positionFirstCustomer){
+    city.populateCity(firstCustomer.coordinates.x, firstCustomer.coordinates.y, 'C');
+}
+    
+
+
+console.table(city.board); 
 
 /*
 let getDronPosition = new Array();

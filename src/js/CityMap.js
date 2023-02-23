@@ -1,18 +1,25 @@
+
+
 export default  class CityMap {
-    constructor(x, y) {
+    
+    constructor(x, y ) {
         this.x = x;
         this.y = y;
+        this.board = [];
     }
 
     create() {
-        let board = [];
-
+        
         for (let i = 0; i < this.x; i++) {
-            board[i] = [];
+            this.board[i] = [];
             for (let j = 0; j < this.y; j++) {
-                board[i][j] = 0;
+                this.board[i][j] = '-';
             } 
         }
-            console.log(JSON.stringify(board));         
+             
+    }
+
+    populateCity(x, y, value){
+       this.board[x][y] = value;
     }
 }
