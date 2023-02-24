@@ -1,7 +1,7 @@
 import CityMap from './CityMap.js';
 import Warehouse from './Warehouse.js';
 import Customer from './Customer.js';
-import FindPoint from './util.js';
+import checkPointPosition from './util.js';
 import ShortestPathBetweenCellsBFS from './Cell.js';
 
 import fs from 'fs';
@@ -21,7 +21,7 @@ for (let i = 0; i < numberOfWarehouses; i++) {
     let warehouse = new Warehouse(x, y, data['warehouses'][i].name);
     //console.log(warehouse);
 
-    let positionOfWarehouse = FindPoint(cityDimensionX, cityDimensionY, x, y);
+    let positionOfWarehouse = checkPointPosition(cityDimensionX, cityDimensionY, x, y);
     if (positionOfWarehouse) {
         city.populateCity(x, y, 'W');
 
@@ -38,7 +38,7 @@ for (let i = 0; i < numberOfCustomers; i++) {
     let customer = new Customer(i, data['customers'][i].name, x, y);
     //console.log(customer);
 
-    let positionOfCustomer = FindPoint(cityDimensionX, cityDimensionY, x, y);
+    let positionOfCustomer = checkPointPosition(cityDimensionX, cityDimensionY, x, y);
     if (positionOfCustomer) {
         city.populateCity(x, y, 'C');
     } else {
