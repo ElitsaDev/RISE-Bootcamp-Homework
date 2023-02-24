@@ -5,10 +5,11 @@ export default class Warehouse {
         this.name = name;
         this.products = {}
     } 
-    
+    /*
     loadingProducts(products){
         if(products){
             this.products = products;
         }
     }
+    */
 }

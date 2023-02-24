@@ -1,4 +1,11 @@
 {
+    "output": {
+        "poweredOn": true,
+        "minutes": {
+            "program": 10,
+            "real": 400
+        }
+    },
     "map-top-right-coordinate": {
         "x": 20,
         "y": 20
@@ -82,6 +89,20 @@
                 "bread": 2,
                 "onion": 6
             }
+        }
+    ],
+    "typesOfDrones": [
+        {
+            "capacity": "500W",
+            "consumption": "1W"
+        },
+        {
+            "capacity": "1kW",
+            "consumption": "3W"
+        },
+        {
+            "capacity": "2kW",
+            "consumption": "5W"
         }
     ]
 }

@@ -1,16 +1,15 @@
-
 class Cell  {
-    constructor(x, y, distance, previousNode) {
+    constructor(x, y, distance, value, previousNode) {
         this.x = x;
         this.y = y;
         this.distance = distance; 
+		this.value = value;
         this.previousNode = previousNode; 
     }
 	toString() {
 		return "(" + this.x + ", " + this.y + ")";
 	}
 }
-
 class ShortestPathBetweenCellsBFS {
 	//BFS, Time O(n^2), Space O(n^2)
     shortestPath(matrix, start, end) {
@@ -19,7 +18,9 @@ class ShortestPathBetweenCellsBFS {
 		let destinationX = end[0];
         let destinationY = end[1];	
 		//if start or end value is 0, return
-		if (matrix[sourceX][sourceY] == 0 || matrix[destinationX][destinationY] == 0) {
+		if (matrix[sourceX][sourceY] == null 
+			|| matrix[destinationX][destinationY] == null
+			|| matrix[destinationX][destinationY] == 'C') {
 			console.log("There is no path.");
 			return;  
 		}
@@ -30,8 +31,8 @@ class ShortestPathBetweenCellsBFS {
 	    for (let i = 0; i < m; i++) {
             cells[i] = [];
 	        for (let j = 0; j < n; j++) {               
-	            if (matrix[i][j] != 0) {
-	                cells[i][j] = new Cell(i, j, Number.MAX_VALUE, null);                   
+	            if (matrix[i][j] != null) {
+	                cells[i][j] = new Cell(i, j, Number.MAX_VALUE, matrix[i][j], null);                   
 	            }
 	        }
 	    }
@@ -41,21 +42,21 @@ class ShortestPathBetweenCellsBFS {
 	    src.distance = 0;
 	    queue.push(src);
 	    let destination = null;
-	    let p;
-	    while ((p = queue.shift()) != null) {
+	    let point;
+	    while ((point = queue.shift()) != null) {
 	    	//find destinationination 
-	        if (p.x == destinationX && p.y == destinationY) { 
-	            destination = p;
+	        if (point.x == destinationX && point.y == destinationY) { 
+	            destination = point;
 	            break;
 	        }      
 	        // moving up
-	        this.visit(cells, queue, p.x-1, p.y, p);    
+	        this.visit(cells, queue, point.x-1, point.y, point);    
             // moving left
-	        this.visit(cells, queue, p.x, p.y-1, p);     
+	        this.visit(cells, queue, point.x, point.y-1, point);     
 	        // moving down
-	        this.visit(cells, queue, p.x+1, p.y, p);             
+	        this.visit(cells, queue, point.x+1, point.y, point);             
 	        //moving right
-	        this.visit(cells, queue, p.x, p.y+1, p);
+	        this.visit(cells, queue, point.x, point.y+1, point);
 	    }
 	    
 	    //compose the path if path exists
@@ -65,47 +66,33 @@ class ShortestPathBetweenCellsBFS {
 	        return;
 	    } else {
 	        let path = [];
-	        p = destination;
+	        point = destination;
 	        do {
                 count++;
-	            path.unshift(p);
-	        } while ((p = p.prev) != null);
-	        console.log(`${path}`);
-            console.log(`Number of movement: ${count}`)
+	            path.unshift(point);
+	        } while ((point = point.prev) != null);
+	       	// console.log(`${path}`);
+        	//console.log(`Number of movement: ${count}`)
+			return count;
 	    }
 	}
 	
 	//function to update cell visiting status, Time O(1), Space O(1)
 	visit(cells, queue, x, y, parent) { 
 		//out of boundary
-	    if (x < 0 || x >= cells.length || y < 0 || y >= cells[0].length || cells[x][y] == null) {
+	    if (x < 0 || x >= cells.length || y < 0 || y >= cells[0].length 
+					|| cells[x][y] == null || cells[x][y].value == 'C') {
 	        return;
 	    }    
 	    //update distanceance, and previous node
 	    let distance = parent.distance + 1;
-	    let p = cells[x][y];
-	    if (distance < p.distance) {
-	        p.distance = distance;
-	        p.prev = parent;
-	        queue.push(p);
+	    let point = cells[x][y];
+	    if (distance < point.distance) {
+	        point.distance = distance;
+	        point.prev = parent;
+	        queue.push(point);
 	    }
 	}
 }
-const matrix = [
-    [1, 0, 0, 1],
-    [0, 1, 1, 1],
-    [0, 1, 1, 1]];
-let myObj = new ShortestPathBetweenCellsBFS();  
-//case1, there is no path
-let start = [0, 0];
-let end = [1, 1];
-console.log("case 1: ");
-myObj.shortestPath(matrix, start, end);
-//case 2, there is path
-let start1 = [1, 1];
-let end1 = [2, 3];
-console.log("case 2: ");
-myObj.shortestPath(matrix, start1, end1);
-
 
 export default ShortestPathBetweenCellsBFS;
