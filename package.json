@@ -5,8 +5,7 @@
   "description": "First Homework\r Елица Андреева, \r e-mail:eli0andr@abv.bg",
   "main": "index.js",
   "scripts": {
-    "start": "--save-dev webpack nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "--save-dev webpack nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +22,8 @@
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "node-fetch": "^3.3.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "ws": "^8.12.1"
   },
   "devDependencies": {
     "webpack": "^5.75.0"
