@@ -42,6 +42,7 @@ export default `
                     <option value="bread">Bread</option>
                     <option value="onion">Onion</option>
                 </select>
+                <input type="number" id="quantity" name="quantity" placeholder="Quantity">
                 <input type="submit" id="btn" value="Add" />
             </form>
         </div>

@@ -3,8 +3,13 @@ import home from '../views/home.js';
 import create from '../views/create.js';
 import errorPage from '../views/404.js';
 import siteCss from '../public/css/style.css.js';
+import timeToDelay from './services/Service.js';
+import { parse } from 'querystring';
+import fs from 'fs';
 
-const server = http.createServer( (req, res) => {
+const fsPromises = fs.promises;
+
+const server = http.createServer((req, res) => {
     res.writeHead(200, {
         'Content-Type': 'text/html',
     });
@@ -16,14 +21,37 @@ const server = http.createServer( (req, res) => {
             'Content-Type': 'text/css',
         });
         res.write(siteCss);
-    }else if (req.url == '/orders/add') {
+    } else if (req.url == '/orders/add' && req.method==="POST") {
+        
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            fsPromises.readFile('././db.json', 'utf8')
+                .then(data => {
+                    let json = JSON.parse(data);
+                   let ADDED = JSON.parse(parse(body)) ;
+                    json.orders.push({customerId: data.customerId ,productList: {...data}});
+                    fsPromises.writeFile('./db.json', JSON.stringify(json, null, 2 ));
+                }) 
+                .catch(error => {
+                    console.log("Field to update data")
+                });   
+
+            console.log();
+            res.end('ok');
+        });
+
+    } else if(req.url == '/orders/add') {
         res.write(`${create}`);
-    } else {
+    }else {
         res.write(`${errorPage}`);
     }
     res.end();
 });
 
+timeToDelay;
 server.listen(5000);
 console.log('HTTP Server is running on port 5000...');
 
